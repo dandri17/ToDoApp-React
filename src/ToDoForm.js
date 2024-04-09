@@ -25,20 +25,21 @@ function ToDoForm() {
   };
 
   return (
-    <div>
+    <div className="mainContainer">
       <h1>ToDo App</h1>
       <input
         type="text"
         value={newTask}
         onChange={handleInputChange}
         placeholder="Enter task"
+        className="inputTask"
       />
-      <button onClick={handleAddTask}>Add Task</button>
+      <button onClick={handleAddTask} className="addButton">Add Task</button>
       <ul>
         { tasks.map((task) => (
           <li key={task.id}>
             {task.task}
-            <button onClick={() => handleDeleteTask(task.id)}>Delete</button>
+            <button className="deleteButton" onClick={() => handleDeleteTask(task.id)}>Delete</button>
           </li> /* Ne koristimo indexes kao keys već id. Matej je rekao da je potrebno dodati: {id: nekiRandomId, task: newTask} 
           Dakle, treba i kreirati random id. +++RIJEŠENO+++ */
         ))}
