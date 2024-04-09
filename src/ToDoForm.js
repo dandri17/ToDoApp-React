@@ -33,7 +33,7 @@ function ToDoForm() {
     );
     setTasks(updatedTasks);
   }; 
-  
+
   return (
     <div className="mainContainer">
       <h1>ToDo App</h1>
@@ -50,10 +50,10 @@ function ToDoForm() {
       </div>
       <div><ul>
         { tasks.map((task) => (
-          <li key={task.id} >
+          <li key={task.id}>
              <input type="checkbox" checked={task.completed}
               onChange={() => handleCompletedTask(task.id)} ></input>
-            <div className="task">{task.task}</div>
+            <div className={`"task" ${task.completed ? "completed" : ""}`}>{task.task}</div>
             <button className="deleteButton" onClick={() => handleDeleteTask(task.id)}>Delete</button>
           </li> /* Ne koristimo indexes kao keys već id. Matej je rekao da je potrebno dodati: {id: nekiRandomId, task: newTask} 
           Dakle, treba i kreirati random id. +++RIJEŠENO+++ */
