@@ -14,11 +14,28 @@ h1{
 .addButton {
     font-size: 1rem;
     margin: 50px;
-    border-radius: 25px;
     width: 150px;
 }
 .deleteButton {
     background-color: rgba(255, 0, 0, 0.26);
-    margin: 25px;
+    margin: 5px;
     padding: 10px;
+}
+.addButton:hover {
+    background-color: rgba(147, 233, 255, 0.815);
+}
+ul {
+    list-style-type: none;
+    padding: 0;
+  } 
+.li {
+    display: flex;
+    flex-direction: s;
+    justify-content: space-around;
+    align-items: center;
+}
+.task {
+    border: 1px solid black;
+    min-width: 300px;
+    
 }
