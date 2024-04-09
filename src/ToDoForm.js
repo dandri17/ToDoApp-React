@@ -1,10 +1,20 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { v4 as uuidv4 } from 'uuid';
-
+import Button from '@mui/material/Button';
 
 function ToDoForm() {
   const [tasks, setTasks] = useState([]);
   const [newTask, setNewTask] = useState("");
+  useEffect(() => {
+    const storedTasks = JSON.parse(localStorage.getItem('tasks'));
+    if (storedTasks) {
+      setTasks(storedTasks);
+    }
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem('tasks', JSON.stringify(tasks));
+  }, [tasks]); 
 
   const handleAddTask = () => {
     if (newTask.trim() !== ""){
@@ -46,7 +56,7 @@ function ToDoForm() {
         className="inputTask"
       /></div>
       <div>
-      <button onClick={handleAddTask} className="addButton">Add Task</button>
+      <Button onClick={handleAddTask} className="addButton">Add Task</Button>
       </div>
       <div><ul>
         { tasks.map((task) => (
@@ -54,7 +64,7 @@ function ToDoForm() {
              <input type="checkbox" checked={task.completed}
               onChange={() => handleCompletedTask(task.id)} ></input>
             <div className={`"task" ${task.completed ? "completed" : ""}`}>{task.task}</div>
-            <button className="deleteButton" onClick={() => handleDeleteTask(task.id)}>Delete</button>
+            <Button variant="contained" onClick={() => handleDeleteTask(task.id)}>Delete</Button>
           </li> /* Ne koristimo indexes kao keys već id. Matej je rekao da je potrebno dodati: {id: nekiRandomId, task: newTask} 
           Dakle, treba i kreirati random id. +++RIJEŠENO+++ */
         ))}
