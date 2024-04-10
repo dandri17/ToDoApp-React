@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { v4 as uuidv4 } from 'uuid';
 import Button from '@mui/material/Button';
+import TextField from '@mui/material/TextField';
+import DeleteIcon from '@mui/icons-material/Delete';
+import ControlPointIcon from '@mui/icons-material/ControlPoint';
 
 function ToDoForm() {
   const [tasks, setTasks] = useState([]);
@@ -45,18 +48,17 @@ function ToDoForm() {
   }; 
 
   return (
+   
     <div className="mainContainer">
       <h1>ToDo App</h1>
       <div>
-      <input
-        type="text"
-        value={newTask}
+      <TextField variant="outlined" color="primary" focused value={newTask}
         onChange={handleInputChange}
         placeholder="Enter task"
         className="inputTask"
       /></div>
       <div>
-      <Button onClick={handleAddTask} className="addButton">Add Task</Button>
+      <Button variant="contained" color="primary" style={{margin: "35px"}} onClick={handleAddTask} className="addButton"><ControlPointIcon/>Add Task</Button>
       </div>
       <div><ul>
         { tasks.map((task) => (
@@ -64,7 +66,7 @@ function ToDoForm() {
              <input type="checkbox" checked={task.completed}
               onChange={() => handleCompletedTask(task.id)} ></input>
             <div className={`"task" ${task.completed ? "completed" : ""}`}>{task.task}</div>
-            <Button variant="contained" onClick={() => handleDeleteTask(task.id)}>Delete</Button>
+            <Button variant="outlined" color="error" style={{margin: "10px 15px"}} onClick={() => handleDeleteTask(task.id)}><DeleteIcon />Delete</Button>
           </li> /* Ne koristimo indexes kao keys već id. Matej je rekao da je potrebno dodati: {id: nekiRandomId, task: newTask} 
           Dakle, treba i kreirati random id. +++RIJEŠENO+++ */
         ))}

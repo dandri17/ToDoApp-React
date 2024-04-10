@@ -11,19 +11,19 @@ h1{
     width: 300px;
     height: 25px;
 }
-.addButton {
+/* .addButton {
     font-size: 1rem;
     margin: 50px;
     width: 150px;
-}
-.deleteButton {
+} */
+/* .deleteButton {
     background-color: rgba(255, 0, 0, 0.26);
     margin: 5px;
     padding: 10px;
-}
-.addButton:hover {
+} */
+/* .addButton:hover {
     background-color: rgba(147, 233, 255, 0.815);
-}
+} */
 ul {
     list-style-type: none;
     padding: 0;
