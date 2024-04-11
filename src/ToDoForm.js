@@ -28,7 +28,7 @@ function ToDoForm() {
     setTasks([...tasks, newTodo]);
     setNewTask(""); } 
     else {
-      alert("Unesite zadatak!"); 
+      return; 
   }};
 
   const handleDeleteTask = (id) => {
