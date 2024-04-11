@@ -3,27 +3,12 @@
     justify-content:space-around;
     align-items:center;
     flex-direction: column;
+    margin-bottom: 5px;
+    padding: 2px 10px;
 }
 h1{
     font-size: 3rem;
 }
-.inputTask {
-    width: 300px;
-    height: 25px;
-}
-/* .addButton {
-    font-size: 1rem;
-    margin: 50px;
-    width: 150px;
-} */
-/* .deleteButton {
-    background-color: rgba(255, 0, 0, 0.26);
-    margin: 5px;
-    padding: 10px;
-} */
-/* .addButton:hover {
-    background-color: rgba(147, 233, 255, 0.815);
-} */
 ul {
     list-style-type: none;
     padding: 0;
