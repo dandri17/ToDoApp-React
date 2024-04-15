@@ -4,6 +4,7 @@ import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import DeleteIcon from '@mui/icons-material/Delete';
 import ControlPointIcon from '@mui/icons-material/ControlPoint';
+import './App.css'
 // --------------------------------------------------------
 // import List from '@mui/material/List';
 // import ListItem from '@mui/material/ListItem';
@@ -17,7 +18,7 @@ import ControlPointIcon from '@mui/icons-material/ControlPoint';
 function ToDoForm() {
   const [tasks, setTasks] = useState([]);
   const [newTask, setNewTask] = useState("");
-     
+
   useEffect(() => {
     const storedTasks = JSON.parse(localStorage.getItem('tasks'));
     if (storedTasks) {
@@ -27,19 +28,21 @@ function ToDoForm() {
 
   useEffect(() => {
     localStorage.setItem('tasks', JSON.stringify(tasks));
-  }, [tasks]); 
+  }, [tasks]);
 
   const handleAddTask = () => {
-    if (newTask.trim() !== ""){
-    const newTodo = {
-      id: uuidv4(),
-      task: newTask
-    };
-    setTasks([...tasks, newTodo]);
-    setNewTask(""); } 
+    if (newTask.trim() !== "") {
+      const newTodo = {
+        id: uuidv4(),
+        task: newTask
+      };
+      setTasks([...tasks, newTodo]);
+      setNewTask("");
+    }
     else {
-      return; 
-  }};
+      return;
+    }
+  };
 
   const handleDeleteTask = (id) => {
     const todoList = tasks.filter((task) => task.id !== id);
@@ -55,55 +58,60 @@ function ToDoForm() {
       task.id === id ? { ...task, completed: !task.completed } : task
     );
     setTasks(updatedTasks);
-  }; 
-  
+  };
+
   const handleToggleTask = (id) => {
     const updatedTasks = tasks.map((task) =>
       task.id === id ? { ...task, completed: !task.completed } : task
     );
     setTasks(updatedTasks);
-  };  
+  };
 
   const handleKeyPress = (event) => {
     if (event.key === "Enter") {
       handleAddTask();
     }
-  }; 
+  };
 
   return (
-   
-    <div className="mainContainer">
+
+    <div className="main-container">
       <h1>ToDo App</h1>
-      <div style={{display:"flex", justifyContent:"center" , alignItems:"center"}}>
-      <TextField variant="outlined" color="primary" focused value={newTask}
-        onChange={handleInputChange}
-        onKeyDown={handleKeyPress}  
-        placeholder="Enter task"
-        style={{width:"300px"}}
-      />
-      <Button variant="contained" color="primary" style={{marginLeft: "30px"}} onClick={handleAddTask} className="addButton"><ControlPointIcon/>Add Task</Button>
+      <div className="task-form">
+        <TextField variant="outlined" color="primary"
+          focused value={newTask}
+          onChange={handleInputChange}
+          onKeyDown={handleKeyPress}
+          placeholder="Enter task"
+          style={{ width: "450px" }}
+        />
+        <Button variant="contained" color="primary"
+          style={{ marginLeft: "3px" }}
+          onClick={handleAddTask}
+          className="addButton">
+          <ControlPointIcon />Add Task</Button>
       </div>
-      <div><ul>
-        { tasks.map((task) => (
-          <li key={task.id}>
-            <div onClick={() => handleToggleTask(task.id)} className={task.completed ? "completed" : ""}> 
-              <input type="checkbox" checked={task.completed}
-              onChange={() => handleCompletedTask(task.id)} ></input>
-              <label className={`"task" ${task.completed ? "completed" : ""}`}>{task.task}</label>
-            </div>
-            <Button variant="outlined" color="error" style={{margin: "10px 15px"}} onClick={() => handleDeleteTask(task.id)}><DeleteIcon />Delete</Button>
-          </li> /* Ne koristimo indexes kao keys već id. Matej je rekao da je potrebno dodati: {id: nekiRandomId, task: newTask} 
-          Dakle, treba i kreirati random id. +++RIJEŠENO+++ */
-        ))}
-      </ul></div>
-      
+      <div className="task-list">
+        <ul>
+          {tasks.map((task) => (
+            <li key={task.id}>
+              <div onClick={() => handleToggleTask(task.id)} className={task.completed ? "completed" : ""}>
+                <input type="checkbox" checked={task.completed}
+                  onChange={() => handleCompletedTask(task.id)} ></input>
+                <label className={`"task" ${task.completed ? "completed" : ""}`}>{task.task}</label>
+              </div>
+              <Button variant="outlined" color="error" style={{ margin: "10px 15px" }} onClick={() => handleDeleteTask(task.id)}><DeleteIcon />Delete</Button>
+            </li>
+          ))}
+        </ul>
+      </div>
     </div>
   );
 }
 
 
 // return (
-   
+
 //   <div className="mainContainer">
 //     <h1>ToDo App</h1>
 //     <div style={{display:"flex", justifyContent:"center" , alignItems:"center"}}>
@@ -118,15 +126,15 @@ function ToDoForm() {
 //     <div><List sx={{ width: '100%', maxWidth: 500, bgcolor: 'background.paper' }}>
 //       { tasks.map((task) => (
 //         <ListItem key={task.id}>
-          {/* -------------------------------------------------------------------------------------------------------------------- */}
-          {/* <div onClick={() => handleToggleTask(task.id)} className={task.completed ? "completed" : ""}> 
+{/* -------------------------------------------------------------------------------------------------------------------- */ }
+{/* <div onClick={() => handleToggleTask(task.id)} className={task.completed ? "completed" : ""}> 
             <input type="checkbox" checked={task.completed}
             onChange={() => handleCompletedTask(task.id)} ></input>
             <label className={`"task" ${task.completed ? "completed" : ""}`}>{task.task}</label>
           </div>
           <Button  variant="outlined" color="error" style={{margin: "10px 15px"}} onClick={() => handleDeleteTask(task.id)}><DeleteIcon />Delete</Button> */}
-          {/* -------------------------------------------------------------------------------------------------------------- */}
-          {/* <ListItemButton role={undefined} onClick={handleToggleTask(task.id)} dense>
+{/* -------------------------------------------------------------------------------------------------------------- */ }
+{/* <ListItemButton role={undefined} onClick={handleToggleTask(task.id)} dense>
               <ListItemIcon>
                 <Checkbox
                   edge="start"
@@ -143,7 +151,7 @@ function ToDoForm() {
 //         Dakle, treba i kreirati random id. +++RIJEŠENO+++ */
 //       ))}
 //     </List></div>
-    
+
 //   </div>
 // );
 // }
